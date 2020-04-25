@@ -78,6 +78,59 @@ var Str = /** @class */ (function () {
         return str.trim().split(" ").map(function (word) { return Str.ucfirst(word); }).join(" ");
     };
     /**
+     * Replaces all occurances of needle from the string
+     *
+     * @param str
+     * @param needle
+     * @param replace
+     */
+    Str.replace = function (str, needle, replace) {
+        var regex = new RegExp("\\" + needle, 'g');
+        return str.replace(regex, replace);
+    };
+    /**
+     * Replaces multiple occurances of needle from the string with single
+     *
+     * @param str
+     * @param needle
+     * @param replace
+     */
+    Str.replaceWithOne = function (str, needle) {
+        var regex = new RegExp("\\" + needle + "{2,}", 'g');
+        return str.replace(regex, needle);
+    };
+    /**
+     * Removes multiple occurances of needle from the start and end of
+     * the string
+     *
+     * @param str
+     * @param needle
+     */
+    Str.trim = function (str, needle) {
+        var regex = new RegExp("^\\" + needle + "+|\\" + needle + "+$", 'g');
+        return str.replace(regex, "");
+    };
+    /**
+     * Removes multiple occurances of needle from the end of string
+     *
+     * @param str
+     * @param needle
+     */
+    Str.trimEnd = function (str, needle) {
+        var regex = new RegExp("\\" + needle + "+$", 'g');
+        return str.replace(regex, "");
+    };
+    /**
+     * Removes multiple occurances of needle from the start of string
+     *
+     * @param str
+     * @param needle
+     */
+    Str.trimStart = function (str, needle) {
+        var regex = new RegExp("^\\" + needle + "+", 'g');
+        return str.replace(regex, "");
+    };
+    /**
      * The cache of snake-cased words.
      */
     Str.snakeCache = {};

@@ -54,4 +54,42 @@ export declare class Str {
      * @param str
      */
     static ucwords(str: string): string;
+    /**
+     * Replaces all occurances of needle from the string
+     *
+     * @param str
+     * @param needle
+     * @param replace
+     */
+    static replace(str: string, needle: string, replace: string): string;
+    /**
+     * Replaces multiple occurances of needle from the string with single
+     *
+     * @param str
+     * @param needle
+     * @param replace
+     */
+    static replaceWithOne(str: string, needle: string): string;
+    /**
+     * Removes multiple occurances of needle from the start and end of
+     * the string
+     *
+     * @param str
+     * @param needle
+     */
+    static trim(str: string, needle: string): string;
+    /**
+     * Removes multiple occurances of needle from the end of string
+     *
+     * @param str
+     * @param needle
+     */
+    static trimEnd(str: string, needle: string): string;
+    /**
+     * Removes multiple occurances of needle from the start of string
+     *
+     * @param str
+     * @param needle
+     */
+    static trimStart(str: string, needle: string): string;
 }
