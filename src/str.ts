@@ -110,8 +110,8 @@ export class Str {
      * @param needle 
      * @param replace 
      */
-    public static replace(str: string, needle: string | RegExp, replace: string) {
-        const regex = new RegExp(needle, 'g');
+    public static replace(str: string, needle: string, replace: string) {
+        const regex = new RegExp(`\\${needle}`, 'g');
 
         return str.replace(regex, replace);
     }
@@ -124,7 +124,7 @@ export class Str {
      * @param replace 
      */
     public static replaceWithOne(str: string, needle: string) {
-        const regex = new RegExp(`${needle}{2,}`, 'g');
+        const regex = new RegExp(`\\${needle}{2,}`, 'g');
 
         return str.replace(regex, needle);
     }
@@ -137,7 +137,9 @@ export class Str {
      * @param needle 
      */
     public static trim(str: string, needle: string) {
-        return Str.replace(str, `^${needle}+|${needle}+$`, "");
+        const regex = new RegExp(`^\\${needle}+|\\${needle}+$`, 'g');
+
+        return str.replace(regex, "");
     }
 
     /**
@@ -147,7 +149,9 @@ export class Str {
      * @param needle 
      */
     public static trimEnd(str: string, needle: string) {
-        return Str.replace(str, `${needle}+$`, "");
+        const regex = new RegExp(`\\${needle}+$`, 'g');
+
+        return str.replace(regex, "");
     }
 
     /**
@@ -157,7 +161,9 @@ export class Str {
      * @param needle 
      */
     public static trimStart(str: string, needle: string) {
-        return Str.replace(str, `^${needle}+`, "");
+        const regex = new RegExp(`^\\${needle}+`, 'g');
+
+        return str.replace(regex, "");
     }
 
 }
