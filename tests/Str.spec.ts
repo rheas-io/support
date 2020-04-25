@@ -35,4 +35,49 @@ describe("Str test suits", () => {
         expect(Str.lcfirst("")).toBe("");
         expect(Str.lcfirst("a")).toBe("a");
     });
+
+    //Test multiple replace
+    it("test multiple replace", () => {
+        expect(Str.replace("abcDefGhi./\\//", "?", "/")).toBe("abcDefGhi./\\//");
+        expect(Str.replace("abcDefGhi./\\//", "Def", "dEF")).toBe("abcdEFGhi./\\//");
+        expect(Str.replace("aaabcDefGhi./\\//", "a", "b")).toBe("bbbbcDefGhi./\\//");
+        expect(Str.replace("aaabcDefGhiii./\\//", "i", "j")).toBe("aaabcDefGhjjj./\\//");
+        expect(Str.replace("//bcDefGhi./\\//", "/", "\\")).toBe("\\\\bcDefGhi.\\\\\\\\");
+    });
+
+    //Test multiple replace with one
+    it("test replace with one", () => {
+        expect(Str.replaceWithOne("abcDefGhi./\\//", "?")).toBe("abcDefGhi./\\//");
+        expect(Str.replaceWithOne("abcDefGhi./\\//", "/")).toBe("abcDefGhi./\\/");
+        expect(Str.replaceWithOne("aaabcDefGhi./\\//", "a")).toBe("abcDefGhi./\\//");
+        expect(Str.replaceWithOne("aaabcDefGhiii./\\//", "i")).toBe("aaabcDefGhi./\\//");
+        expect(Str.replaceWithOne("//bcDef///Ghi./\\//", "/")).toBe("/bcDef/Ghi./\\/");
+    });
+
+    //Test trimEnd
+    it("test trimEnd", () => {
+        expect(Str.trimEnd("abcDefGhi./\\//", "/")).toBe("abcDefGhi./\\");
+        expect(Str.trimEnd("aaabcDefGhi./\\//\\", "\\")).toBe("aaabcDefGhi./\\//");
+        expect(Str.trimEnd("aaabcDefGhiii./\\//abcd", "abcd")).toBe("aaabcDefGhiii./\\//");
+        expect(Str.trimEnd("//bcDefGhi./\\//???", "?")).toBe("//bcDefGhi./\\//");
+        expect(Str.trimEnd("//bcDefGhi./\\////", "/")).toBe("//bcDefGhi./\\");
+    });
+
+    //Test trimStart
+    it("test trimStart", () => {
+        expect(Str.trimStart("abcDefGhi./\\//", "a")).toBe("bcDefGhi./\\//");
+        expect(Str.trimStart("\\aaabcDefGhi./\\//\\", "\\")).toBe("aaabcDefGhi./\\//\\");
+        expect(Str.trimStart("aaabcDefGhiii./\\//abcd", "aaabc")).toBe("DefGhiii./\\//abcd");
+        expect(Str.trimStart("???//bcDefGhi./\\//???", "?")).toBe("//bcDefGhi./\\//???");
+        expect(Str.trimStart("//bcDefGhi./\\////", "/")).toBe("bcDefGhi./\\////");
+    });
+
+    //Test trim
+    it("test trim both ends", () => {
+        expect(Str.trim("abcDefGhi./\\//abc", "abc")).toBe("DefGhi./\\//");
+        expect(Str.trim("\\aaabcDefGhi./\\//\\", "\\")).toBe("aaabcDefGhi./\\//");
+        expect(Str.trim("aaabcDefGhiii./\\//aaabcd", "aaabc")).toBe("DefGhiii./\\//aaabcd");
+        expect(Str.trim("???//bcDefGhi./\\//???", "?")).toBe("//bcDefGhi./\\//");
+        expect(Str.trim("//bcDefGhi./\\////", "/")).toBe("bcDefGhi./\\");
+    });
 });
