@@ -103,4 +103,61 @@ export class Str {
         return str.trim().split(" ").map(word => Str.ucfirst(word)).join(" ");
     }
 
+    /**
+     * Replaces all occurances of needle from the string
+     * 
+     * @param str 
+     * @param needle 
+     * @param replace 
+     */
+    public static replace(str: string, needle: string | RegExp, replace: string) {
+        const regex = new RegExp(needle, 'g');
+
+        return str.replace(regex, replace);
+    }
+
+    /**
+     * Replaces multiple occurances of needle from the string with single
+     * 
+     * @param str 
+     * @param needle 
+     * @param replace 
+     */
+    public static replaceWithOne(str: string, needle: string) {
+        const regex = new RegExp(`${needle}{2,}`, 'g');
+
+        return str.replace(regex, needle);
+    }
+
+    /**
+     * Removes multiple occurances of needle from the start and end of
+     * the string
+     * 
+     * @param str 
+     * @param needle 
+     */
+    public static trim(str: string, needle: string) {
+        return Str.replace(str, `^${needle}+|${needle}+$`, "");
+    }
+
+    /**
+     * Removes multiple occurances of needle from the end of string
+     * 
+     * @param str 
+     * @param needle 
+     */
+    public static trimEnd(str: string, needle: string) {
+        return Str.replace(str, `${needle}+$`, "");
+    }
+
+    /**
+     * Removes multiple occurances of needle from the start of string
+     * 
+     * @param str 
+     * @param needle 
+     */
+    public static trimStart(str: string, needle: string) {
+        return Str.replace(str, `^${needle}+`, "");
+    }
+
 }
