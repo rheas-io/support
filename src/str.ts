@@ -1,4 +1,4 @@
-import { StringObject } from "@laress/contracts";
+import { StringObject } from "@rheas/contracts";
 
 export class Str {
 

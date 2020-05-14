@@ -1,10 +1,10 @@
 {
-  "name": "@laress/support",
+  "name": "@rheas/support",
   "version": "0.0.1",
-  "description": "Laress support functions and helper functions",
+  "description": "Rheas support functions and helper functions",
   "main": "index.js",
   "keywords": [
-    "laress",
+    "rheas",
     "express",
     "framework",
     "nodejs",
@@ -17,9 +17,9 @@
     "tsc": "tsc",
     "test": "jest",
     "coverage": "jest --coverage",
-    "copypackage": "cp -rf package.json build/src",
+    "copypackage": "cp -rf package.json build",
     "build": "tsc && npm run copypackage",
-    "copypackage_dev": "cp -rf package.json build_dev/src",
+    "copypackage_dev": "cp -rf package.json build_dev",
     "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
   },
   "devDependencies": {
@@ -31,12 +31,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/laress-io/support.git"
+    "url": "git+https://github.com/rheas-io/support.git"
   },
   "author": "Kalesh Kaladharan",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/laress-io/support/issues"
+    "url": "https://github.com/rheas-io/support/issues"
   },
-  "homepage": "https://github.com/laress-io/support#readme"
+  "homepage": "https://github.com/rheas-io/support#readme"
 }
