@@ -80,4 +80,11 @@ describe("Str test suits", () => {
         expect(Str.trim("???//bcDefGhi./\\//???", "?")).toBe("//bcDefGhi./\\//");
         expect(Str.trim("//bcDefGhi./\\////", "/")).toBe("bcDefGhi./\\");
     });
+
+    //Test replace slashes
+    it("test path check", () => {
+        expect(Str.path("\\app\\controllers\\filename")).toBe("app/controllers/filename");
+        expect(Str.path("\\app\\controllers\\filename ")).toBe("app/controllers/filename");
+        expect(Str.path("\\app\\controllers\\filename")).toBe("app/controllers/filename");
+    });
 });

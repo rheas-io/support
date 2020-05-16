@@ -78,6 +78,15 @@ var Str = /** @class */ (function () {
         return str.trim().split(" ").map(function (word) { return Str.ucfirst(word); }).join(" ");
     };
     /**
+     * Cleans a path. Removes backward slashes with forward slashes.
+     * Removes any traiiling or leading spaces.
+     *
+     * @param path
+     */
+    Str.path = function (path) {
+        return Str.trim(Str.replace(path.trim(), '\\', '/'), '/');
+    };
+    /**
      * Replaces all occurances of needle from the string
      *
      * @param str

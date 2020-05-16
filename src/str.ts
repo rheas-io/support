@@ -104,6 +104,16 @@ export class Str {
     }
 
     /**
+     * Cleans a path. Removes backward slashes with forward slashes. 
+     * Removes trailing and leading spaces and slashes.
+     * 
+     * @param path 
+     */
+    public static path(path: string) {
+        return Str.trim(Str.replace(path.trim(), '\\', '/'), '/');
+    }
+
+    /**
      * Replaces all occurances of needle from the string
      * 
      * @param str 
