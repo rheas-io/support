@@ -56,7 +56,7 @@ export declare class Str {
     static ucwords(str: string): string;
     /**
      * Cleans a path. Removes backward slashes with forward slashes.
-     * Removes any traiiling or leading spaces.
+     * Removes trailing and leading spaces and slashes.
      *
      * @param path
      */

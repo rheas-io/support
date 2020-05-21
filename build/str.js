@@ -79,7 +79,7 @@ var Str = /** @class */ (function () {
     };
     /**
      * Cleans a path. Removes backward slashes with forward slashes.
-     * Removes any traiiling or leading spaces.
+     * Removes trailing and leading spaces and slashes.
      *
      * @param path
      */
