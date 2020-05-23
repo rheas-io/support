@@ -8,3 +8,10 @@ import { IApp } from "@rheas/contracts/core/app";
  * @return IApp
  */
 export declare function app(rootPath?: string): IApp;
+/**
+ * Returns the app configuration
+ *
+ * @param key
+ * @param defaultValue
+ */
+export declare function config(key: string, defaultValue?: any): any;

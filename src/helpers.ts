@@ -12,3 +12,13 @@ import { IApp } from "@rheas/contracts/core/app";
 export function app(rootPath: string = ""): IApp {
     return Application.getInstance(rootPath);
 }
+
+/**
+ * Returns the app configuration
+ * 
+ * @param key 
+ * @param defaultValue 
+ */
+export function config(key: string, defaultValue: any = null) {
+    return app().config(key, defaultValue);
+}

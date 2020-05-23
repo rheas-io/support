@@ -14,3 +14,14 @@ function app(rootPath) {
     return app_1.Application.getInstance(rootPath);
 }
 exports.app = app;
+/**
+ * Returns the app configuration
+ *
+ * @param key
+ * @param defaultValue
+ */
+function config(key, defaultValue) {
+    if (defaultValue === void 0) { defaultValue = null; }
+    return app().config(key, defaultValue);
+}
+exports.config = config;
