@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import { StringObject } from "@rheas/contracts";
 
 export class Str {
@@ -174,6 +175,23 @@ export class Str {
         const regex = new RegExp(`^\\${needle}+`, 'g');
 
         return str.replace(regex, "");
+    }
+
+    /**
+     * Creates a random byte and returns hex string
+     * 
+     * @param size 
+     */
+    public static async random(size: number = 16): Promise<string> {
+
+        return await new Promise<string>((resolve, reject) => {
+            crypto.randomBytes(size, (error, buffer) => {
+                if (error !== null) {
+                    return reject("Error creating random bytes");
+                }
+                return resolve(buffer.toString('hex'));
+            });
+        });
     }
 
 }

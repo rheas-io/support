@@ -99,4 +99,10 @@ export declare class Str {
      * @param needle
      */
     static trimStart(str: string, needle: string): string;
+    /**
+     * Creates a random byte and returns hex string
+     *
+     * @param size
+     */
+    static random(size?: number): Promise<string>;
 }
