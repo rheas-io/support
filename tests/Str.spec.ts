@@ -88,15 +88,40 @@ describe("Str test suits", () => {
         expect(Str.path("/app/controllers/filename")).toBe("app/controllers/filename");
     });
 
+    it("test email", async () => {
+        expect(Str.isValidEmail('kalesh123')).toBe(false);
+        expect(Str.isValidEmail('kalesh@kaysy.io')).toBe(true);
+
+        // email 320 character check
+        let random = await Str.random(320) + '@kaysy.com';
+        expect(Str.isValidEmail(random)).toBe(false);
+
+        // Local part 65 char
+        let randomLocal = await Str.random(65) + '@kaysy.com';
+        expect(Str.isValidEmail(randomLocal)).toBe(false);
+
+        // local part dot check
+        randomLocal = '.' + await Str.random(15) + '@kaysy.com';
+        expect(Str.isValidEmail(randomLocal)).toBe(false);
+
+        // random username truthiness.
+        randomLocal = await Str.random(15) + '@kaysy.com';
+        expect(Str.isValidEmail(randomLocal)).toBe(true);
+    });
+
     it("test url", () => {
         expect(Str.isValidUrl("http://rheas.io")).toBe(true);
         expect(Str.isValidUrl("http://rheas")).toBe(false);
+
         // Protocol manadatory check
         expect(Str.isValidUrl("rheas.io")).toBe(false);
+
         // Localhost check fails. Rheas use ip as localhost.
         expect(Str.isValidUrl("http://localhost:3000")).toBe(false);
+
         // Localhost ip check
         expect(Str.isValidUrl("http://127.0.0.1:3000")).toBe(true);
+
         // Excluded ip check
         expect(Str.isValidUrl("http://0.0.0.1:3000")).toBe(false);
     });
