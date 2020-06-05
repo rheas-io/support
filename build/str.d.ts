@@ -13,29 +13,25 @@ export declare class Str {
      */
     protected static studlyCache: StringObject;
     /**
-     * Convert a string to kebab case.
-     *
-     * @param value
-     */
-    static kebab(value: string): string;
-    /**
-     * Convert a string to snake case.
-     *
-     * @param value
-     */
-    static snake(value: string): string;
-    /**
      * Convert a value to camel case.
      *
      * @param  value
      */
     static camel(value: string): string;
     /**
-     * Convert a value to studly caps case.
+     * Checks if a given string is a valid url or not.
      *
-     * @param  value
+     * Source: https://gist.github.com/dperini/729294
+     *
+     * @param url
      */
-    static studly(value: string): string;
+    static isValidUrl(url: string): boolean;
+    /**
+     * Convert a string to kebab case.
+     *
+     * @param value
+     */
+    static kebab(value: string): string;
     /**
      * Convert the first character of the given string to lower case
      *
@@ -43,24 +39,18 @@ export declare class Str {
      */
     static lcfirst(str: string): string;
     /**
-     * Convert the first character of the given string to upper case
-     *
-     * @param str
-     */
-    static ucfirst(str: string): string;
-    /**
-     * Upper case the first char of all the words in the string.
-     *
-     * @param str
-     */
-    static ucwords(str: string): string;
-    /**
      * Cleans a path. Removes backward slashes with forward slashes.
      * Removes trailing and leading spaces and slashes.
      *
      * @param path
      */
     static path(path: string): string;
+    /**
+     * Creates a random byte and returns hex string
+     *
+     * @param size
+     */
+    static random(size?: number): Promise<string>;
     /**
      * Replaces all occurances of needle from the string
      *
@@ -77,6 +67,18 @@ export declare class Str {
      * @param replace
      */
     static replaceWithOne(str: string, needle: string): string;
+    /**
+     * Convert a string to snake case.
+     *
+     * @param value
+     */
+    static snake(value: string): string;
+    /**
+     * Convert a value to studly caps case.
+     *
+     * @param  value
+     */
+    static studly(value: string): string;
     /**
      * Removes multiple occurances of needle from the start and end of
      * the string
@@ -100,9 +102,15 @@ export declare class Str {
      */
     static trimStart(str: string, needle: string): string;
     /**
-     * Creates a random byte and returns hex string
+     * Convert the first character of the given string to upper case
      *
-     * @param size
+     * @param str
      */
-    static random(size?: number): Promise<string>;
+    static ucfirst(str: string): string;
+    /**
+     * Upper case the first char of all the words in the string.
+     *
+     * @param str
+     */
+    static ucwords(str: string): string;
 }

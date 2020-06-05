@@ -83,8 +83,21 @@ describe("Str test suits", () => {
 
     //Test replace slashes
     it("test path check", () => {
-        expect(Str.path("\\app\\controllers\\filename")).toBe("app/controllers/filename");
-        expect(Str.path("\\app\\controllers\\filename ")).toBe("app/controllers/filename");
-        expect(Str.path("\\app\\controllers\\filename")).toBe("app/controllers/filename");
+        expect(Str.path("\\app\\controllers\\\\filename")).toBe("app/controllers/filename");
+        expect(Str.path("\\\\app\\controllers\\filename\\ ")).toBe("app/controllers/filename");
+        expect(Str.path("/app/controllers/filename")).toBe("app/controllers/filename");
+    });
+
+    it("test url", () => {
+        expect(Str.isValidUrl("http://rheas.io")).toBe(true);
+        expect(Str.isValidUrl("http://rheas")).toBe(false);
+        // Protocol manadatory check
+        expect(Str.isValidUrl("rheas.io")).toBe(false);
+        // Localhost check fails. Rheas use ip as localhost.
+        expect(Str.isValidUrl("http://localhost:3000")).toBe(false);
+        // Localhost ip check
+        expect(Str.isValidUrl("http://127.0.0.1:3000")).toBe(true);
+        // Excluded ip check
+        expect(Str.isValidUrl("http://0.0.0.1:3000")).toBe(false);
     });
 });

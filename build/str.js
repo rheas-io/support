@@ -44,32 +44,6 @@ var Str = /** @class */ (function () {
     function Str() {
     }
     /**
-     * Convert a string to kebab case.
-     *
-     * @param value
-     */
-    Str.kebab = function (value) {
-        return Str.snake(value).replace(/_/ug, '-');
-    };
-    /**
-     * Convert a string to snake case.
-     *
-     * @param value
-     */
-    Str.snake = function (value) {
-        var key = value;
-        if (Str.snakeCache[value]) {
-            return Str.snakeCache[value];
-        }
-        // Remove all spaces after first letter of words
-        // are capitalized.
-        value = Str.ucwords(value).replace(/\s+/ug, '');
-        // Add an underscore before the capital letters.
-        // And convert the whole string to lower case.
-        value = value.replace(/(.)(?=[A-Z])/ug, '$1_').toLocaleLowerCase();
-        return Str.snakeCache[key] = value;
-    };
-    /**
      * Convert a value to camel case.
      *
      * @param  value
@@ -81,17 +55,28 @@ var Str = /** @class */ (function () {
         return Str.camelCache[value] = Str.lcfirst(Str.studly(value));
     };
     /**
-     * Convert a value to studly caps case.
+     * Checks if a given string is a valid url or not.
      *
-     * @param  value
+     * Source: https://gist.github.com/dperini/729294
+     *
+     * @param url
      */
-    Str.studly = function (value) {
-        var key = value;
-        if (Str.studlyCache[key]) {
-            return Str.studlyCache[key];
-        }
-        value = Str.ucwords(value.replace(/-|_/g, ' '));
-        return Str.studlyCache[key] = value.replace(/\ /g, '');
+    Str.isValidUrl = function (url) {
+        // If the pattern does not match the url, null is returned and the whole value if
+        // url is a match. Hence the !! operator for truthiness.
+        //
+        // Using Regex class resulted in unexpected results for the pattern. So use it
+        // this way.
+        return !!/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?:(?:10|127)(?:\.\d{1,3}){3})|(?:(?:169\.254|192\.168)(?:\.\d{1,3}){2})|(?:172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i
+            .exec(url);
+    };
+    /**
+     * Convert a string to kebab case.
+     *
+     * @param value
+     */
+    Str.kebab = function (value) {
+        return Str.snake(value).replace(/_/ug, '-');
     };
     /**
      * Convert the first character of the given string to lower case
@@ -102,29 +87,36 @@ var Str = /** @class */ (function () {
         return str.charAt(0).toLocaleLowerCase() + str.slice(1);
     };
     /**
-     * Convert the first character of the given string to upper case
-     *
-     * @param str
-     */
-    Str.ucfirst = function (str) {
-        return str.charAt(0).toLocaleUpperCase() + str.slice(1);
-    };
-    /**
-     * Upper case the first char of all the words in the string.
-     *
-     * @param str
-     */
-    Str.ucwords = function (str) {
-        return str.trim().split(" ").map(function (word) { return Str.ucfirst(word); }).join(" ");
-    };
-    /**
      * Cleans a path. Removes backward slashes with forward slashes.
      * Removes trailing and leading spaces and slashes.
      *
      * @param path
      */
     Str.path = function (path) {
-        return Str.trim(Str.replace(path.trim(), '\\', '/'), '/');
+        return Str.trim(Str.replaceWithOne(Str.replace(path.trim(), '\\', '/'), '/'), '/');
+    };
+    /**
+     * Creates a random byte and returns hex string
+     *
+     * @param size
+     */
+    Str.random = function (size) {
+        if (size === void 0) { size = 16; }
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
+                            crypto_1.default.randomBytes(size, function (error, buffer) {
+                                if (error !== null) {
+                                    return reject("Error creating random bytes");
+                                }
+                                return resolve(buffer.toString('hex'));
+                            });
+                        })];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     /**
      * Replaces all occurances of needle from the string
@@ -147,6 +139,37 @@ var Str = /** @class */ (function () {
     Str.replaceWithOne = function (str, needle) {
         var regex = new RegExp("\\" + needle + "{2,}", 'g');
         return str.replace(regex, needle);
+    };
+    /**
+     * Convert a string to snake case.
+     *
+     * @param value
+     */
+    Str.snake = function (value) {
+        var key = value;
+        if (Str.snakeCache[value]) {
+            return Str.snakeCache[value];
+        }
+        // Remove all spaces after first letter of words
+        // are capitalized.
+        value = Str.ucwords(value).replace(/\s+/ug, '');
+        // Add an underscore before the capital letters.
+        // And convert the whole string to lower case.
+        value = value.replace(/(.)(?=[A-Z])/ug, '$1_').toLocaleLowerCase();
+        return Str.snakeCache[key] = value;
+    };
+    /**
+     * Convert a value to studly caps case.
+     *
+     * @param  value
+     */
+    Str.studly = function (value) {
+        var key = value;
+        if (Str.studlyCache[key]) {
+            return Str.studlyCache[key];
+        }
+        value = Str.ucwords(value.replace(/-|_/g, ' '));
+        return Str.studlyCache[key] = value.replace(/\ /g, '');
     };
     /**
      * Removes multiple occurances of needle from the start and end of
@@ -180,27 +203,20 @@ var Str = /** @class */ (function () {
         return str.replace(regex, "");
     };
     /**
-     * Creates a random byte and returns hex string
+     * Convert the first character of the given string to upper case
      *
-     * @param size
+     * @param str
      */
-    Str.random = function (size) {
-        if (size === void 0) { size = 16; }
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, new Promise(function (resolve, reject) {
-                            crypto_1.default.randomBytes(size, function (error, buffer) {
-                                if (error !== null) {
-                                    return reject("Error creating random bytes");
-                                }
-                                return resolve(buffer.toString('hex'));
-                            });
-                        })];
-                    case 1: return [2 /*return*/, _a.sent()];
-                }
-            });
-        });
+    Str.ucfirst = function (str) {
+        return str.charAt(0).toLocaleUpperCase() + str.slice(1);
+    };
+    /**
+     * Upper case the first char of all the words in the string.
+     *
+     * @param str
+     */
+    Str.ucwords = function (str) {
+        return str.trim().split(" ").map(function (word) { return Str.ucfirst(word); }).join(" ");
     };
     /**
      * The cache of snake-cased words.
