@@ -58,12 +58,11 @@ var EmailValidator = /** @class */ (function () {
      */
     EmailValidator.prototype.validateLocal = function (local) {
         local = local.trim();
-        // Local parts should not start with or
-        // end with a dot.
-        if (local.endsWith(".") || local.startsWith(".")) {
-            return false;
+        // Local parts should not start with or end with a dot.
+        // Its size should be greater than 0 and less than 65 characters.
+        if (local.length <= 0 || local.length > 64 || local.startsWith(".") || local.endsWith(".")) {
+            throw Error("Invalid username part.");
         }
-        return local.length > 0 && local.length < 65;
     };
     /**
      * Checks the length of the domain part of the email address.

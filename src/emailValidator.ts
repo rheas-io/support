@@ -61,13 +61,11 @@ export class EmailValidator {
     public validateLocal(local: string) {
         local = local.trim();
 
-        // Local parts should not start with or
-        // end with a dot.
-        if (local.endsWith(".") || local.startsWith(".")) {
-            return false;
+        // Local parts should not start with or end with a dot.
+        // Its size should be greater than 0 and less than 65 characters.
+        if (local.length <= 0 || local.length > 64 || local.startsWith(".") || local.endsWith(".")) {
+            throw Error("Invalid username part.");
         }
-
-        return local.length > 0 && local.length < 65;
     }
 
     /**
@@ -91,6 +89,7 @@ export class EmailValidator {
         // should have at least one character and not more than
         // 63 characters.
         let domainParts = domain.split(".");
+        
         let partsCheck = function (part: string) {
             part = part.trim();
             return part.length === 0 || part.length > 63;

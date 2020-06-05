@@ -33,7 +33,7 @@ export declare class EmailValidator {
      *
      * @param local Local part of the email address
      */
-    validateLocal(local: string): boolean;
+    validateLocal(local: string): void;
     /**
      * Checks the length of the domain part of the email address.
      * It should have at least 3 characters for the domain name, dot
