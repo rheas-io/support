@@ -61,6 +61,16 @@ export declare class Str {
      */
     static path(path: string): string;
     /**
+     * Generates a uri encoded query string for the given params. The second
+     * argument is a list of parameters that has to be excluded.
+     *
+     * Returns string of form ?company=kaysy%20LLC&framework=rheas
+     *
+     * @param params
+     * @param excludeKeys
+     */
+    static queryString(params: StringObject, excludeKeys?: string[]): string;
+    /**
      * Creates a random byte and returns hex string
      *
      * @param size

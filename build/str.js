@@ -114,6 +114,26 @@ var Str = /** @class */ (function () {
         return Str.trim(Str.replaceWithOne(Str.replace(path.trim(), '\\', '/'), '/'), '/');
     };
     /**
+     * Generates a uri encoded query string for the given params. The second
+     * argument is a list of parameters that has to be excluded.
+     *
+     * Returns string of form ?company=kaysy%20LLC&framework=rheas
+     *
+     * @param params
+     * @param excludeKeys
+     */
+    Str.queryString = function (params, excludeKeys) {
+        if (excludeKeys === void 0) { excludeKeys = []; }
+        var queryString = Object.keys(params).reduce(function (queryString, currentParam) {
+            if (excludeKeys.includes(currentParam)) {
+                return '';
+            }
+            return queryString + currentParam + '=' + params[currentParam] + '&';
+        }, '');
+        queryString = Str.trimEnd(queryString, '&');
+        return queryString.length > 0 ? '?' + encodeURIComponent(queryString) : '';
+    };
+    /**
      * Creates a random byte and returns hex string
      *
      * @param size

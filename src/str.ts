@@ -99,6 +99,30 @@ export class Str {
     }
 
     /**
+     * Generates a uri encoded query string for the given params. The second
+     * argument is a list of parameters that has to be excluded.
+     * 
+     * Returns string of form ?company=kaysy%20LLC&framework=rheas
+     * 
+     * @param params 
+     * @param excludeKeys 
+     */
+    public static queryString(params: StringObject, excludeKeys: string[] = []): string {
+
+        let queryString = Object.keys(params).reduce(
+            (queryString, currentParam) => {
+                if (excludeKeys.includes(currentParam)) {
+                    return '';
+                }
+                return queryString + currentParam + '=' + params[currentParam] + '&';
+            }, '');
+
+        queryString = Str.trimEnd(queryString, '&');
+
+        return queryString.length > 0 ? '?' + encodeURIComponent(queryString) : ''
+    }
+
+    /**
      * Creates a random byte and returns hex string
      * 
      * @param size 
