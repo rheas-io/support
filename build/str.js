@@ -249,8 +249,14 @@ var Str = /** @class */ (function () {
      * @param needle
      */
     Str.trimStart = function (str, needle) {
-        needle = Str.escapeForRegex(needle);
-        var regex = new RegExp("^" + needle + "+", 'g');
+        var regexPattern = "";
+        if (Array.isArray(needle)) {
+            regexPattern = '(' + needle.map(function (item) { return Str.escapeForRegex(item); }).join('|') + ')';
+        }
+        else {
+            regexPattern = Str.escapeForRegex(needle);
+        }
+        var regex = new RegExp("^" + regexPattern + "+", 'g');
         return str.replace(regex, "");
     };
     /**

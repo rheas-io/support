@@ -251,10 +251,16 @@ export class Str {
      * @param str 
      * @param needle 
      */
-    public static trimStart(str: string, needle: string) {
-        needle = Str.escapeForRegex(needle);
+    public static trimStart(str: string, needle: string | string[]) {
+        let regexPattern = "";
 
-        const regex = new RegExp(`^${needle}+`, 'g');
+        if (Array.isArray(needle)) {
+            regexPattern = '(' + needle.map(item => Str.escapeForRegex(item)).join('|') + ')';
+        } else {
+            regexPattern = Str.escapeForRegex(needle);
+        }
+
+        const regex = new RegExp(`^${regexPattern}+`, 'g');
 
         return str.replace(regex, "");
     }

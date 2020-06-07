@@ -131,7 +131,7 @@ export declare class Str {
      * @param str
      * @param needle
      */
-    static trimStart(str: string, needle: string): string;
+    static trimStart(str: string, needle: string | string[]): string;
     /**
      * Convert the first character of the given string to upper case
      *
