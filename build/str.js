@@ -56,6 +56,14 @@ var Str = /** @class */ (function () {
         return Str.camelCache[value] = Str.lcfirst(Str.studly(value));
     };
     /**
+     * Returns a regex escaped pattern.
+     *
+     * @param pattern
+     */
+    Str.escapeForRegex = function (pattern) {
+        return pattern.replace(/([()[{*+.$^\\|?])/g, '\\$1');
+    };
+    /**
      * Returns true if the given argument is a valid email.
      *
      * Weak email validation is performed by checking charcter lengths of
@@ -164,7 +172,8 @@ var Str = /** @class */ (function () {
      * @param replace
      */
     Str.replace = function (str, needle, replace) {
-        var regex = new RegExp("\\" + needle, 'g');
+        needle = Str.escapeForRegex(needle);
+        var regex = new RegExp("" + needle, 'g');
         return str.replace(regex, replace);
     };
     /**
@@ -175,7 +184,8 @@ var Str = /** @class */ (function () {
      * @param replace
      */
     Str.replaceWithOne = function (str, needle) {
-        var regex = new RegExp("\\" + needle + "{2,}", 'g');
+        needle = Str.escapeForRegex(needle);
+        var regex = new RegExp(needle + "{2,}", 'g');
         return str.replace(regex, needle);
     };
     /**
@@ -217,7 +227,8 @@ var Str = /** @class */ (function () {
      * @param needle
      */
     Str.trim = function (str, needle) {
-        var regex = new RegExp("^\\" + needle + "+|\\" + needle + "+$", 'g');
+        needle = Str.escapeForRegex(needle);
+        var regex = new RegExp("^" + needle + "+|" + needle + "+$", 'g');
         return str.replace(regex, "");
     };
     /**
@@ -227,7 +238,8 @@ var Str = /** @class */ (function () {
      * @param needle
      */
     Str.trimEnd = function (str, needle) {
-        var regex = new RegExp("\\" + needle + "+$", 'g');
+        needle = Str.escapeForRegex(needle);
+        var regex = new RegExp(needle + "+$", 'g');
         return str.replace(regex, "");
     };
     /**
@@ -237,7 +249,8 @@ var Str = /** @class */ (function () {
      * @param needle
      */
     Str.trimStart = function (str, needle) {
-        var regex = new RegExp("^\\" + needle + "+", 'g');
+        needle = Str.escapeForRegex(needle);
+        var regex = new RegExp("^" + needle + "+", 'g');
         return str.replace(regex, "");
     };
     /**

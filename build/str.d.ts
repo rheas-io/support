@@ -19,6 +19,12 @@ export declare class Str {
      */
     static camel(value: string): string;
     /**
+     * Returns a regex escaped pattern.
+     *
+     * @param pattern
+     */
+    static escapeForRegex(pattern: string): string;
+    /**
      * Returns true if the given argument is a valid email.
      *
      * Weak email validation is performed by checking charcter lengths of

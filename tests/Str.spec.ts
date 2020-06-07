@@ -70,6 +70,7 @@ describe("Str test suits", () => {
         expect(Str.trimStart("aaabcDefGhiii./\\//abcd", "aaabc")).toBe("DefGhiii./\\//abcd");
         expect(Str.trimStart("???//bcDefGhi./\\//???", "?")).toBe("//bcDefGhi./\\//???");
         expect(Str.trimStart("//bcDefGhi./\\////", "/")).toBe("bcDefGhi./\\////");
+        expect(Str.trimStart("bcDefGhi./\\//", "b")).toBe("cDefGhi./\\//");
     });
 
     //Test trim
