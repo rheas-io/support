@@ -73,6 +73,16 @@ describe("Str test suits", () => {
         expect(Str.trimStart("bcDefGhi./\\//", "b")).toBe("cDefGhi./\\//");
     });
 
+    //Test trimStart multiple
+    it("test trimStart array", () => {
+        expect(Str.trimStart("aaabbcDefGhi./\\//", ["a", "b"])).toBe("cDefGhi./\\//");
+        expect(Str.trimStart("//\\//\\\\bcDefGhi./\\////", ["/", '\\'])).toBe("bcDefGhi./\\////");
+        expect(Str.trimStart("https://kaysy.io", ["https://", "http://"])).toBe("kaysy.io");
+        expect(Str.trimStart("https://http://kaysy.io", ["https://", "http://"])).toBe("kaysy.io");
+        expect(Str.trimStart("http://https://kaysy.io", ["https://", "http://"])).toBe("kaysy.io");
+        expect(Str.trimStart("http://https://kaysy.io/https://", ["https://", "http://"])).toBe("kaysy.io/https://");
+    });
+
     //Test trim
     it("test trim both ends", () => {
         expect(Str.trim("abcDefGhi./\\//abc", "abc")).toBe("DefGhi./\\//");
