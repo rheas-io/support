@@ -19,6 +19,12 @@ export declare class Str {
      */
     static camel(value: string): string;
     /**
+     * Returns a dotted path of the given path.
+     *
+     * @param path
+     */
+    static dottedPath(path: string): string;
+    /**
      * Returns a regex escaped pattern.
      *
      * @param pattern

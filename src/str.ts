@@ -32,6 +32,15 @@ export class Str {
     }
 
     /**
+     * Returns a dotted path of the given path.
+     * 
+     * @param path 
+     */
+    public static dottedPath(path: string): string {
+        return Str.replace(Str.path(path), '/', '.');
+    }
+
+    /**
      * Returns a regex escaped pattern.
      * 
      * @param pattern 

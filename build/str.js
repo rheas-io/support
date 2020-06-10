@@ -56,6 +56,14 @@ var Str = /** @class */ (function () {
         return Str.camelCache[value] = Str.lcfirst(Str.studly(value));
     };
     /**
+     * Returns a dotted path of the given path.
+     *
+     * @param path
+     */
+    Str.dottedPath = function (path) {
+        return Str.replace(Str.path(path), '/', '.');
+    };
+    /**
      * Returns a regex escaped pattern.
      *
      * @param pattern
