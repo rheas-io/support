@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { StringObject } from "@rheas/contracts";
+import { AnyObject } from "@rheas/contracts";
 import { EmailValidator } from "./emailValidator";
 
 export class Str {
@@ -107,19 +107,19 @@ export class Str {
      * @param params 
      * @param excludeKeys 
      */
-    public static queryString(params: StringObject, excludeKeys: string[] = []): string {
+    public static queryString(params: AnyObject, excludeKeys: string[] = []): string {
 
         let queryString = Object.keys(params).reduce(
             (queryString, currentParam) => {
-                if (excludeKeys.includes(currentParam)) {
-                    return '';
+                if (!excludeKeys.includes(currentParam)) {
+                    queryString += encodeURIComponent(currentParam) + '=' + encodeURIComponent(params[currentParam]) + '&';
                 }
-                return queryString + currentParam + '=' + params[currentParam] + '&';
+                return queryString;
             }, '');
 
         queryString = Str.trimEnd(queryString, '&');
 
-        return queryString.length > 0 ? '?' + encodeURIComponent(queryString) : ''
+        return queryString.length > 0 ? '?' + queryString : ''
     }
 
     /**
@@ -175,7 +175,7 @@ export class Str {
      * @param value
      */
     public static snake(value: string): string {
-        
+
         // Remove all spaces after first letter of words
         // are capitalized.
         value = Str.ucwords(value).replace(/\s+/ug, '');
