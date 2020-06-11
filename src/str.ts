@@ -5,30 +5,12 @@ import { EmailValidator } from "./emailValidator";
 export class Str {
 
     /**
-     * The cache of snake-cased words.
-     */
-    protected static snakeCache: StringObject = {};
-
-    /**
-     * The cache of camel-cased words.
-     */
-    protected static camelCache: StringObject = {};
-
-    /**
-     * The cache of studly-cased words.
-     */
-    protected static studlyCache: StringObject = {};
-
-    /**
      * Convert a value to camel case.
      *
      * @param  value
      */
     public static camel(value: string): string {
-        if (Str.camelCache[value]) {
-            return Str.camelCache[value];
-        }
-        return Str.camelCache[value] = Str.lcfirst(Str.studly(value));
+        return Str.lcfirst(Str.studly(value));
     }
 
     /**
@@ -193,12 +175,7 @@ export class Str {
      * @param value
      */
     public static snake(value: string): string {
-
-        let key = value;
-
-        if (Str.snakeCache[value]) {
-            return Str.snakeCache[value];
-        }
+        
         // Remove all spaces after first letter of words
         // are capitalized.
         value = Str.ucwords(value).replace(/\s+/ug, '');
@@ -206,7 +183,7 @@ export class Str {
         // And convert the whole string to lower case.
         value = value.replace(/(.)(?=[A-Z])/ug, '$1_').toLocaleLowerCase();
 
-        return Str.snakeCache[key] = value;
+        return value;
     }
 
     /**
@@ -215,14 +192,10 @@ export class Str {
      * @param  value
      */
     public static studly(value: string): string {
-        let key = value;
 
-        if (Str.studlyCache[key]) {
-            return Str.studlyCache[key];
-        }
         value = Str.ucwords(value.replace(/-|_/g, ' '));
 
-        return Str.studlyCache[key] = value.replace(/\ /g, '');
+        return value.replace(/\ /g, '');
     }
 
     /**

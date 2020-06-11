@@ -1,18 +1,6 @@
 import { StringObject } from "@rheas/contracts";
 export declare class Str {
     /**
-     * The cache of snake-cased words.
-     */
-    protected static snakeCache: StringObject;
-    /**
-     * The cache of camel-cased words.
-     */
-    protected static camelCache: StringObject;
-    /**
-     * The cache of studly-cased words.
-     */
-    protected static studlyCache: StringObject;
-    /**
      * Convert a value to camel case.
      *
      * @param  value

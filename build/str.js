@@ -50,10 +50,7 @@ var Str = /** @class */ (function () {
      * @param  value
      */
     Str.camel = function (value) {
-        if (Str.camelCache[value]) {
-            return Str.camelCache[value];
-        }
-        return Str.camelCache[value] = Str.lcfirst(Str.studly(value));
+        return Str.lcfirst(Str.studly(value));
     };
     /**
      * Returns a dotted path of the given path.
@@ -202,17 +199,13 @@ var Str = /** @class */ (function () {
      * @param value
      */
     Str.snake = function (value) {
-        var key = value;
-        if (Str.snakeCache[value]) {
-            return Str.snakeCache[value];
-        }
         // Remove all spaces after first letter of words
         // are capitalized.
         value = Str.ucwords(value).replace(/\s+/ug, '');
         // Add an underscore before the capital letters.
         // And convert the whole string to lower case.
         value = value.replace(/(.)(?=[A-Z])/ug, '$1_').toLocaleLowerCase();
-        return Str.snakeCache[key] = value;
+        return value;
     };
     /**
      * Convert a value to studly caps case.
@@ -220,12 +213,8 @@ var Str = /** @class */ (function () {
      * @param  value
      */
     Str.studly = function (value) {
-        var key = value;
-        if (Str.studlyCache[key]) {
-            return Str.studlyCache[key];
-        }
         value = Str.ucwords(value.replace(/-|_/g, ' '));
-        return Str.studlyCache[key] = value.replace(/\ /g, '');
+        return value.replace(/\ /g, '');
     };
     /**
      * Removes multiple occurances of needle from the start and end of
@@ -283,18 +272,6 @@ var Str = /** @class */ (function () {
     Str.ucwords = function (str) {
         return str.trim().split(" ").map(function (word) { return Str.ucfirst(word); }).join(" ");
     };
-    /**
-     * The cache of snake-cased words.
-     */
-    Str.snakeCache = {};
-    /**
-     * The cache of camel-cased words.
-     */
-    Str.camelCache = {};
-    /**
-     * The cache of studly-cased words.
-     */
-    Str.studlyCache = {};
     return Str;
 }());
 exports.Str = Str;
