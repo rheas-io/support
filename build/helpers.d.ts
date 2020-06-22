@@ -15,3 +15,10 @@ export declare function app(rootPath?: string): IApp;
  * @param defaultValue
  */
 export declare function config(key: string, defaultValue?: any): any;
+/**
+ * Returns the app environment variable value
+ *
+ * @param key
+ * @param defaultValue
+ */
+export declare function env(key: string, defaultValue?: any): any;

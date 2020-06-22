@@ -25,3 +25,14 @@ function config(key, defaultValue) {
     return app().config(key, defaultValue);
 }
 exports.config = config;
+/**
+ * Returns the app environment variable value
+ *
+ * @param key
+ * @param defaultValue
+ */
+function env(key, defaultValue) {
+    if (defaultValue === void 0) { defaultValue = ''; }
+    return app().get('env').get(key, defaultValue);
+}
+exports.env = env;

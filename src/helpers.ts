@@ -22,3 +22,13 @@ export function app(rootPath: string = ""): IApp {
 export function config(key: string, defaultValue: any = null) {
     return app().config(key, defaultValue);
 }
+
+/**
+ * Returns the app environment variable value
+ * 
+ * @param key 
+ * @param defaultValue 
+ */
+export function env(key: string, defaultValue: any = '') {
+    return app().get('env').get(key, defaultValue);
+}
