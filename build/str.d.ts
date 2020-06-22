@@ -1,4 +1,4 @@
-import { StringObject } from "@rheas/contracts";
+import { AnyObject } from "@rheas/contracts";
 export declare class Str {
     /**
      * Convert a value to camel case.
@@ -69,7 +69,7 @@ export declare class Str {
      * @param params
      * @param excludeKeys
      */
-    static queryString(params: StringObject, excludeKeys?: string[]): string;
+    static queryString(params: AnyObject, excludeKeys?: string[]): string;
     /**
      * Creates a random byte and returns hex string
      *

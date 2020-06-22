@@ -138,13 +138,13 @@ var Str = /** @class */ (function () {
     Str.queryString = function (params, excludeKeys) {
         if (excludeKeys === void 0) { excludeKeys = []; }
         var queryString = Object.keys(params).reduce(function (queryString, currentParam) {
-            if (excludeKeys.includes(currentParam)) {
-                return '';
+            if (!excludeKeys.includes(currentParam)) {
+                queryString += encodeURIComponent(currentParam) + '=' + encodeURIComponent(params[currentParam]) + '&';
             }
-            return queryString + currentParam + '=' + params[currentParam] + '&';
+            return queryString;
         }, '');
         queryString = Str.trimEnd(queryString, '&');
-        return queryString.length > 0 ? '?' + encodeURIComponent(queryString) : '';
+        return queryString.length > 0 ? '?' + queryString : '';
     };
     /**
      * Creates a random byte and returns hex string
