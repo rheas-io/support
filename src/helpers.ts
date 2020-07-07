@@ -32,3 +32,12 @@ export function config(key: string, defaultValue: any = null) {
 export function env(key: string, defaultValue: any = '') {
     return app().get('env').get(key, defaultValue);
 }
+
+/**
+ * Returns the applications main database connection.
+ * 
+ * @return dbConnection
+ */
+export function db() {
+    return app().get('db');
+}

@@ -22,3 +22,9 @@ export declare function config(key: string, defaultValue?: any): any;
  * @param defaultValue
  */
 export declare function env(key: string, defaultValue?: any): any;
+/**
+ * Returns the applications main database connection.
+ *
+ * @return dbConnection
+ */
+export declare function db(): any;

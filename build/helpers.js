@@ -36,3 +36,12 @@ function env(key, defaultValue) {
     return app().get('env').get(key, defaultValue);
 }
 exports.env = env;
+/**
+ * Returns the applications main database connection.
+ *
+ * @return dbConnection
+ */
+function db() {
+    return app().get('db');
+}
+exports.db = db;
