@@ -20,7 +20,7 @@ export class Obj {
         const keys = key.split('.');
 
         const result = keys.reduce((prev: any, current: any) => {
-            return (prev && prev[current]) ? prev[current] : undefined;
+            return (prev && prev[current] !== undefined) ? prev[current] : undefined;
         }, object);
 
         return result === undefined ? defaultValue : result;

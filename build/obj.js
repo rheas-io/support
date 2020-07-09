@@ -20,7 +20,7 @@ var Obj = /** @class */ (function () {
         if (defaultValue === void 0) { defaultValue = null; }
         var keys = key.split('.');
         var result = keys.reduce(function (prev, current) {
-            return (prev && prev[current]) ? prev[current] : undefined;
+            return (prev && prev[current] !== undefined) ? prev[current] : undefined;
         }, object);
         return result === undefined ? defaultValue : result;
     };
