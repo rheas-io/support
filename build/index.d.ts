@@ -1,2 +1,3 @@
 import { Str } from "./str";
-export { Str };
+import { Obj } from "./obj";
+export { Str, Obj };
