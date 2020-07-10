@@ -20,7 +20,7 @@ export function app(rootPath: string = ""): IApp {
  * @param defaultValue 
  */
 export function config(key: string, defaultValue: any = null) {
-    return app().config(key, defaultValue);
+    return app().configs().get(key, defaultValue);
 }
 
 /**

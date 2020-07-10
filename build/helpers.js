@@ -22,7 +22,7 @@ exports.app = app;
  */
 function config(key, defaultValue) {
     if (defaultValue === void 0) { defaultValue = null; }
-    return app().config(key, defaultValue);
+    return app().configs().get(key, defaultValue);
 }
 exports.config = config;
 /**
