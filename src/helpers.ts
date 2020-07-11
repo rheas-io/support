@@ -41,7 +41,7 @@ export function db() {
  * @param defaultValue 
  */
 export function env(key: string, defaultValue: any = '') {
-    return app().get('env').get(key, defaultValue);
+    return app().env().get(key, defaultValue);
 }
 
 /**

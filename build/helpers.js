@@ -43,7 +43,7 @@ exports.db = db;
  */
 function env(key, defaultValue) {
     if (defaultValue === void 0) { defaultValue = ''; }
-    return app().get('env').get(key, defaultValue);
+    return app().env().get(key, defaultValue);
 }
 exports.env = env;
 /**
