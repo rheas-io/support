@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var files_1 = require("@rheas/files");
 var app_1 = require("@rheas/core/app");
 /**
  * Returns the application instance. If no instance is
@@ -26,6 +27,15 @@ function config(key, defaultValue) {
 }
 exports.config = config;
 /**
+ * Returns the applications main database connection.
+ *
+ * @return dbConnection
+ */
+function db() {
+    return app().get('db');
+}
+exports.db = db;
+/**
  * Returns the app environment variable value
  *
  * @param key
@@ -37,11 +47,11 @@ function env(key, defaultValue) {
 }
 exports.env = env;
 /**
- * Returns the applications main database connection.
+ * Returns a new fileManager instance.
  *
- * @return dbConnection
+ * @returns
  */
-function db() {
-    return app().get('db');
+function files() {
+    return new files_1.FileManager();
 }
-exports.db = db;
+exports.files = files;

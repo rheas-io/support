@@ -1,4 +1,5 @@
 import { IApp } from "@rheas/contracts/core/app";
+import { IFileManager } from "@rheas/contracts/files";
 /**
  * Returns the application instance. If no instance is
  * available, one will be initialised with the given root
@@ -16,6 +17,12 @@ export declare function app(rootPath?: string): IApp;
  */
 export declare function config(key: string, defaultValue?: any): any;
 /**
+ * Returns the applications main database connection.
+ *
+ * @return dbConnection
+ */
+export declare function db(): any;
+/**
  * Returns the app environment variable value
  *
  * @param key
@@ -23,8 +30,8 @@ export declare function config(key: string, defaultValue?: any): any;
  */
 export declare function env(key: string, defaultValue?: any): any;
 /**
- * Returns the applications main database connection.
+ * Returns a new fileManager instance.
  *
- * @return dbConnection
+ * @returns
  */
-export declare function db(): any;
+export declare function files(): IFileManager;

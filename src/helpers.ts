@@ -1,5 +1,7 @@
+import { FileManager } from "@rheas/files";
 import { Application } from "@rheas/core/app";
 import { IApp } from "@rheas/contracts/core/app";
+import { IFileManager } from "@rheas/contracts/files";
 
 /**
  * Returns the application instance. If no instance is
@@ -24,6 +26,15 @@ export function config(key: string, defaultValue: any = null) {
 }
 
 /**
+ * Returns the applications main database connection.
+ * 
+ * @return dbConnection
+ */
+export function db() {
+    return app().get('db');
+}
+
+/**
  * Returns the app environment variable value
  * 
  * @param key 
@@ -34,10 +45,10 @@ export function env(key: string, defaultValue: any = '') {
 }
 
 /**
- * Returns the applications main database connection.
+ * Returns a new fileManager instance.
  * 
- * @return dbConnection
+ * @returns
  */
-export function db() {
-    return app().get('db');
+export function files(): IFileManager {
+    return new FileManager();
 }
