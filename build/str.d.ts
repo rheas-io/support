@@ -1,6 +1,20 @@
 import { AnyObject } from "@rheas/contracts";
 export declare class Str {
     /**
+     * Decodes a base64 string to the given encoding
+     *
+     * @param data
+     * @param encoding
+     */
+    static base64Decode(data: string, encoding?: string): string;
+    /**
+     * Encodes a utf8 string to base64
+     *
+     * @param data
+     * @param encoding
+     */
+    static base64Encode(data: string): string;
+    /**
      * Convert a value to camel case.
      *
      * @param  value

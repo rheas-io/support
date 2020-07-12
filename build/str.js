@@ -45,6 +45,25 @@ var Str = /** @class */ (function () {
     function Str() {
     }
     /**
+     * Decodes a base64 string to the given encoding
+     *
+     * @param data
+     * @param encoding
+     */
+    Str.base64Decode = function (data, encoding) {
+        if (encoding === void 0) { encoding = 'utf8'; }
+        return Buffer.from(data, 'base64').toString(encoding);
+    };
+    /**
+     * Encodes a utf8 string to base64
+     *
+     * @param data
+     * @param encoding
+     */
+    Str.base64Encode = function (data) {
+        return Buffer.from(data, 'utf8').toString('base64');
+    };
+    /**
      * Convert a value to camel case.
      *
      * @param  value

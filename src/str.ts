@@ -5,6 +5,26 @@ import { EmailValidator } from "./emailValidator";
 export class Str {
 
     /**
+     * Decodes a base64 string to the given encoding
+     * 
+     * @param data 
+     * @param encoding 
+     */
+    public static base64Decode(data: string, encoding: string = 'utf8'): string {
+        return Buffer.from(data, 'base64').toString(encoding);
+    }
+
+    /**
+     * Encodes a utf8 string to base64
+     * 
+     * @param data 
+     * @param encoding 
+     */
+    public static base64Encode(data: string): string {
+        return Buffer.from(data, 'utf8').toString('base64');
+    }
+
+    /**
      * Convert a value to camel case.
      *
      * @param  value
