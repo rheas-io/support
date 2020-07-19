@@ -1,7 +1,19 @@
 import { FileManager } from "@rheas/files";
 import { Application } from "@rheas/core/app";
 import { IApp } from "@rheas/contracts/core/app";
+import { HttpException } from "@rheas/errors/http";
 import { IFileManager } from "@rheas/contracts/files";
+
+/**
+ * Throws an Http exception that will break the request pipeline
+ * causing capture by the exception handler.
+ * 
+ * @param status 
+ * @param message 
+ */
+export function abort(status: number, message: string = ""): void {
+    throw new HttpException(status, message);
+}
 
 /**
  * Returns the application instance. If no instance is

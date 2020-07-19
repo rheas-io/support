@@ -2,6 +2,19 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var files_1 = require("@rheas/files");
 var app_1 = require("@rheas/core/app");
+var http_1 = require("@rheas/errors/http");
+/**
+ * Throws an Http exception that will break the request pipeline
+ * causing capture by the exception handler.
+ *
+ * @param status
+ * @param message
+ */
+function abort(status, message) {
+    if (message === void 0) { message = ""; }
+    throw new http_1.HttpException(status, message);
+}
+exports.abort = abort;
 /**
  * Returns the application instance. If no instance is
  * available, one will be initialised with the given root
