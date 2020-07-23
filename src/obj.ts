@@ -3,6 +3,17 @@ import { AnyObject } from "@rheas/contracts";
 export class Obj {
 
     /**
+     * Checks if an object is an actual object, ie key-value pairs
+     * and not an array or any other types. Typeof won't work as everything 
+     * in JS is an object and arrays could also be considered as an object.
+     * 
+     * @param object 
+     */
+    public isObject(object: AnyObject): boolean {
+        return !!object && object.constructor === Object.prototype.constructor;
+    }
+
+    /**
      * Returns an item from the object. Supports nested search using dotted key.
      * 
      * For example; 
