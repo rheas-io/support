@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Obj = /** @class */ (function () {
-    function Obj() {
-    }
+class Obj {
     /**
      * Checks if an object is an actual object, ie key-value pairs
      * and not an array or any other types. Typeof won't work as everything
@@ -10,9 +8,9 @@ var Obj = /** @class */ (function () {
      *
      * @param object
      */
-    Obj.isObject = function (object) {
+    static isObject(object) {
         return !!object && object.constructor === Object.prototype.constructor;
-    };
+    }
     /**
      * Returns an item from the object. Supports nested search using dotted key.
      *
@@ -26,14 +24,12 @@ var Obj = /** @class */ (function () {
      * @param key
      * @param defaultValue
      */
-    Obj.get = function (object, key, defaultValue) {
-        if (defaultValue === void 0) { defaultValue = null; }
-        var keys = key.split('.');
-        var result = keys.reduce(function (prev, current) {
+    static get(object, key, defaultValue = null) {
+        const keys = key.split('.');
+        const result = keys.reduce((prev, current) => {
             return (prev && prev[current] !== undefined) ? prev[current] : undefined;
         }, object);
         return result === undefined ? defaultValue : result;
-    };
-    return Obj;
-}());
+    }
+}
 exports.Obj = Obj;

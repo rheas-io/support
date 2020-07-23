@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var EmailValidator = /** @class */ (function () {
-    function EmailValidator() {
-    }
+class EmailValidator {
     /**
      * Checks whether the given email is valid or not. We use simple
      * validation rules.
@@ -16,9 +14,9 @@ var EmailValidator = /** @class */ (function () {
      *
      * @param email
      */
-    EmailValidator.prototype.validate = function (email) {
+    validate(email) {
         try {
-            var _a = this.validateParts(email), local = _a[0], domain = _a[1];
+            let [local, domain] = this.validateParts(email);
             this.validateLocal(local);
             this.validateDomain(domain);
         }
@@ -26,7 +24,7 @@ var EmailValidator = /** @class */ (function () {
             return false;
         }
         return true;
-    };
+    }
     /**
      * Validates the whole email address. Email address should
      * have a local part and domain part seperated by single @
@@ -38,8 +36,8 @@ var EmailValidator = /** @class */ (function () {
      *
      * @param email
      */
-    EmailValidator.prototype.validateParts = function (email) {
-        var split_parts = email.split("@");
+    validateParts(email) {
+        let split_parts = email.split("@");
         // Email address should not have more than 1 @ symbol.
         // Though RFC supports it inside a quotes, we will skip
         // those as it is not commonly used.
@@ -47,7 +45,7 @@ var EmailValidator = /** @class */ (function () {
             throw Error("Invalid email address");
         }
         return split_parts;
-    };
+    }
     /**
      * Check if the local part of the email address has
      * the required size.
@@ -56,14 +54,14 @@ var EmailValidator = /** @class */ (function () {
      *
      * @param local Local part of the email address
      */
-    EmailValidator.prototype.validateLocal = function (local) {
+    validateLocal(local) {
         local = local.trim();
         // Local parts should not start with or end with a dot.
         // Its size should be greater than 0 and less than 65 characters.
         if (local.length <= 0 || local.length > 64 || local.startsWith(".") || local.endsWith(".")) {
             throw Error("Invalid username part.");
         }
-    };
+    }
     /**
      * Checks the length of the domain part of the email address.
      * It should have at least 3 characters for the domain name, dot
@@ -74,7 +72,7 @@ var EmailValidator = /** @class */ (function () {
      *
      * @param domain Domain part of the email address
      */
-    EmailValidator.prototype.validateDomain = function (domain) {
+    validateDomain(domain) {
         domain = domain.trim();
         if (domain.length === 0 || domain.length > 255 || domain.endsWith("-") || domain.startsWith("-")) {
             throw ("Invalid domain part.");
@@ -83,14 +81,13 @@ var EmailValidator = /** @class */ (function () {
         // minimum two parts after this split and each part 
         // should have at least one character and not more than
         // 63 characters.
-        var domainParts = domain.split(".");
-        var partsCheck = function (part) {
+        let domainParts = domain.split(".");
+        let partsCheck = function (part) {
             part = part.trim();
             return part.length === 0 || part.length > 63;
         };
         if (domainParts.length < 2 || domainParts.some(partsCheck))
             throw ("Invalid domain part.");
-    };
-    return EmailValidator;
-}());
+    }
+}
 exports.EmailValidator = EmailValidator;

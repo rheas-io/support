@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var files_1 = require("@rheas/files");
-var app_1 = require("@rheas/core/app");
-var http_1 = require("@rheas/errors/http");
+const files_1 = require("@rheas/files");
+const app_1 = require("@rheas/core/app");
+const http_1 = require("@rheas/errors/http");
 /**
  * Throws an Http exception that will break the request pipeline
  * causing capture by the exception handler.
@@ -10,8 +10,7 @@ var http_1 = require("@rheas/errors/http");
  * @param status
  * @param message
  */
-function abort(status, message) {
-    if (message === void 0) { message = ""; }
+function abort(status, message = "") {
     throw new http_1.HttpException(status, message);
 }
 exports.abort = abort;
@@ -23,8 +22,7 @@ exports.abort = abort;
  * @param rootPath
  * @return IApp
  */
-function app(rootPath) {
-    if (rootPath === void 0) { rootPath = ""; }
+function app(rootPath = "") {
     return app_1.Application.getInstance(rootPath);
 }
 exports.app = app;
@@ -34,8 +32,7 @@ exports.app = app;
  * @param key
  * @param defaultValue
  */
-function config(key, defaultValue) {
-    if (defaultValue === void 0) { defaultValue = null; }
+function config(key, defaultValue = null) {
     return app().configs().get(key, defaultValue);
 }
 exports.config = config;
@@ -54,8 +51,7 @@ exports.db = db;
  * @param key
  * @param defaultValue
  */
-function env(key, defaultValue) {
-    if (defaultValue === void 0) { defaultValue = ''; }
+function env(key, defaultValue = '') {
     return app().env().get(key, defaultValue);
 }
 exports.env = env;
