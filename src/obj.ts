@@ -9,7 +9,7 @@ export class Obj {
      * 
      * @param object 
      */
-    public isObject(object: AnyObject): boolean {
+    public static isObject(object: AnyObject): boolean {
         return !!object && object.constructor === Object.prototype.constructor;
     }
 

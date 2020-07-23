@@ -7,7 +7,7 @@ export declare class Obj {
      *
      * @param object
      */
-    isObject(object: AnyObject): boolean;
+    static isObject(object: AnyObject): boolean;
     /**
      * Returns an item from the object. Supports nested search using dotted key.
      *

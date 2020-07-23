@@ -10,7 +10,7 @@ var Obj = /** @class */ (function () {
      *
      * @param object
      */
-    Obj.prototype.isObject = function (object) {
+    Obj.isObject = function (object) {
         return !!object && object.constructor === Object.prototype.constructor;
     };
     /**
