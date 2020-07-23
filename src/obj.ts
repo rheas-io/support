@@ -28,6 +28,10 @@ export class Obj {
      */
     public static get(object: AnyObject, key: string, defaultValue: any = null): any {
 
+        if (object.hasOwnProperty(key)) {
+            return object[key];
+        }
+
         const keys = key.split('.');
 
         const result = keys.reduce((prev: any, current: any) => {

@@ -25,6 +25,9 @@ class Obj {
      * @param defaultValue
      */
     static get(object, key, defaultValue = null) {
+        if (object.hasOwnProperty(key)) {
+            return object[key];
+        }
         const keys = key.split('.');
         const result = keys.reduce((prev, current) => {
             return (prev && prev[current] !== undefined) ? prev[current] : undefined;
