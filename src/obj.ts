@@ -32,9 +32,7 @@ export class Obj {
             return object[key];
         }
 
-        const keys = key.split('.');
-
-        const result = keys.reduce((prev: any, current: any) => {
+        const result = key.split('.').reduce((prev: any, current: any) => {
             return (prev && prev[current] !== undefined) ? prev[current] : undefined;
         }, object);
 

@@ -28,8 +28,7 @@ class Obj {
         if (object.hasOwnProperty(key)) {
             return object[key];
         }
-        const keys = key.split('.');
-        const result = keys.reduce((prev, current) => {
+        const result = key.split('.').reduce((prev, current) => {
             return (prev && prev[current] !== undefined) ? prev[current] : undefined;
         }, object);
         return result === undefined ? defaultValue : result;
