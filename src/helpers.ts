@@ -1,17 +1,17 @@
-import { FileManager } from "@rheas/files";
-import { Application } from "@rheas/core/app";
-import { IApp } from "@rheas/contracts/core/app";
-import { HttpException } from "@rheas/errors/http";
-import { IFileManager } from "@rheas/contracts/files";
+import { FileManager } from '@rheas/files';
+import { Application } from '@rheas/core/app';
+import { IApp } from '@rheas/contracts/core/app';
+import { HttpException } from '@rheas/errors/http';
+import { IFileManager } from '@rheas/contracts/files';
 
 /**
  * Throws an Http exception that will break the request pipeline
  * causing capture by the exception handler.
- * 
- * @param status 
- * @param message 
+ *
+ * @param status
+ * @param message
  */
-export function abort(status: number, message: string = ""): void {
+export function abort(status: number, message: string = ''): void {
     throw new HttpException(status, message);
 }
 
@@ -19,19 +19,19 @@ export function abort(status: number, message: string = ""): void {
  * Returns the application instance. If no instance is
  * available, one will be initialised with the given root
  * path.
- * 
+ *
  * @param rootPath
  * @return IApp
  */
-export function app(rootPath: string = ""): IApp {
+export function app(rootPath: string = ''): IApp {
     return Application.getInstance(rootPath);
 }
 
 /**
  * Returns the app configuration
- * 
- * @param key 
- * @param defaultValue 
+ *
+ * @param key
+ * @param defaultValue
  */
 export function config(key: string, defaultValue: any = null) {
     return app().configs().get(key, defaultValue);
@@ -39,7 +39,7 @@ export function config(key: string, defaultValue: any = null) {
 
 /**
  * Returns the applications main database connection.
- * 
+ *
  * @return dbConnection
  */
 export function db() {
@@ -48,9 +48,9 @@ export function db() {
 
 /**
  * Returns the app environment variable value
- * 
- * @param key 
- * @param defaultValue 
+ *
+ * @param key
+ * @param defaultValue
  */
 export function env(key: string, defaultValue: any = '') {
     return app().env().get(key, defaultValue);
@@ -58,7 +58,7 @@ export function env(key: string, defaultValue: any = '') {
 
 /**
  * Returns a new fileManager instance.
- * 
+ *
  * @returns
  */
 export function files(): IFileManager {

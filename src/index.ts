@@ -1,4 +1,4 @@
-import { Str } from "./str";
-import { Obj } from "./obj";
+import { Str } from './str';
+import { Obj } from './obj';
 
-export { Str, Obj }
+export { Str, Obj };
