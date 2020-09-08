@@ -160,17 +160,40 @@ export class Str {
     }
 
     /**
-     * Creates a random byte and returns hex string
+     * Creates a random string of given length. The string is a base64
+     * encoded string of the random bytes after removing all special
+     * characters like '/', '+' and '='
+     *
+     * Code snippet taken from Laravel/Str random function.
      *
      * @param size
      */
     public static async random(size: number = 16): Promise<string> {
-        return await new Promise<string>((resolve, reject) => {
+        let string = '';
+
+        while (string.length < size) {
+            const byteSize = size - string.length;
+            const bytes = await Str.randomBytes(byteSize);
+
+            string += bytes.toString('base64').replace(/[\/\+=]/g, '');
+
+            string = string.substr(0, size);
+        }
+        return string;
+    }
+
+    /**
+     * Creates {size} random bytes.
+     *
+     * @param size
+     */
+    public static async randomBytes(size: number = 16): Promise<Buffer> {
+        return await new Promise<Buffer>((resolve, reject) => {
             crypto.randomBytes(size, (error, buffer) => {
                 if (error !== null) {
                     return reject('Error creating random bytes');
                 }
-                return resolve(buffer.toString('hex'));
+                return resolve(buffer);
             });
         });
     }

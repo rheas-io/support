@@ -2,12 +2,16 @@ import { Str } from '../src';
 import { AnyObject } from '@rheas/contracts';
 
 describe('Str test suits', () => {
-    // Test camel case of string
-    it('camelCase', () => {
+    /**
+     * Test camel case of string
+     */
+    it('camelCase', async () => {
         expect(Str.camel('abc def ghi')).toBe('abcDefGhi');
     });
 
-    // dottedPath
+    /**
+     * Test dotted path
+     */
     it('dottedPath', () => {
         expect(Str.dottedPath('kaysy/framework/rheas')).toBe('kaysy.framework.rheas');
         expect(Str.dottedPath('kaysy/framework/rheas/index.html')).toBe(
@@ -39,18 +43,18 @@ describe('Str test suits', () => {
         randomLocal = (await Str.random(15)) + '@kaysy.com';
         expect(Str.isValidEmail(randomLocal)).toBe(true);
     });
-    
+
     /**
-    * Checks the isAlphanum functionality of Str helper class.
-    */
-   it('isAlphaNum', () => {
-       expect(Str.isAlphaNum('9c168aa9843ae2bcc')).toBe(true);
-       expect(Str.isAlphaNum('vw9c168aa9843ae2bcczy')).toBe(true);
-       expect(Str.isAlphaNum('9c168aa984_3ae2bcc')).toBe(false);
-       expect(Str.isAlphaNum('9c168aa9843ae2bcc ')).toBe(false);
-       expect(Str.isAlphaNum('')).toBe(false);
-       expect(Str.isAlphaNum(' ')).toBe(false);
-   });
+     * Checks the isAlphanum functionality of Str helper class.
+     */
+    it('isAlphaNum', () => {
+        expect(Str.isAlphaNum('9c168aa9843ae2bcc')).toBe(true);
+        expect(Str.isAlphaNum('vw9c168aa9843ae2bcczy')).toBe(true);
+        expect(Str.isAlphaNum('9c168aa984_3ae2bcc')).toBe(false);
+        expect(Str.isAlphaNum('9c168aa9843ae2bcc ')).toBe(false);
+        expect(Str.isAlphaNum('')).toBe(false);
+        expect(Str.isAlphaNum(' ')).toBe(false);
+    });
 
     /**
      * Checks the isHex functionality of Str helper class.
@@ -111,6 +115,53 @@ describe('Str test suits', () => {
 
         params['encoded'] = 'ciåo';
         expect(Str.queryString(params, ['fbId'])).toBe('?id=1&name=Kaysy&encoded=ci%C3%A5o');
+    });
+
+    /**
+     * Test random string for various string length.
+     *
+     * 1. Valid length
+     * 2. 0 as length
+     * 3. Invalid or negative length - should return empty string.
+     * 
+     * Also check if these strings are just alpha numeric strings with 
+     * no special characters.
+     */
+    it('random string', async () => {
+        let random = await Str.random(16);
+        expect(random).toHaveLength(16);
+        expect(Str.isAlphaNum(random)).toBe(true);
+
+        random = await Str.random(40);
+        expect(random).toHaveLength(40);
+        expect(Str.isAlphaNum(random)).toBe(true);
+
+        random = await Str.random(0);
+        expect(random).toEqual('');
+        expect(random).toHaveLength(0);
+        expect(Str.isAlphaNum(random)).toBe(false);
+
+        random = await Str.random(-1);
+        expect(random).toHaveLength(0);
+        expect(Str.isAlphaNum(random)).toBe(false);
+    });
+
+    /**
+     * Random bytes test for different lengths.
+     *
+     * 1. Valid byte size.
+     * 2. 0 as byte size.
+     * 3. Invalid byte size - throw an error
+     */
+    it('random bytes', async () => {
+        let random = await Str.randomBytes(16);
+        expect(random).toHaveLength(16);
+
+        random = await Str.randomBytes(0);
+        expect(random).toHaveLength(0);
+
+        // Throw an error when invalid byte size is given.
+        expect(Str.randomBytes(-1)).rejects.toThrow();
     });
 
     //Test multiple replace
