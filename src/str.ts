@@ -51,6 +51,16 @@ export class Str {
     }
 
     /**
+     * Checks if a value is an alphanumeric string containing only
+     * chars from 0-9, A-Z and a-z
+     *
+     * @param value
+     */
+    public static isAlphaNum(value: string): boolean {
+        return /^[0-9A-Za-z]+$/g.test(value);
+    }
+
+    /**
      * Checks if a value is a hex string or not.
      *
      * @param value

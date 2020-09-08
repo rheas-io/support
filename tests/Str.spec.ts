@@ -39,6 +39,18 @@ describe('Str test suits', () => {
         randomLocal = (await Str.random(15)) + '@kaysy.com';
         expect(Str.isValidEmail(randomLocal)).toBe(true);
     });
+    
+    /**
+    * Checks the isAlphanum functionality of Str helper class.
+    */
+   it('isAlphaNum', () => {
+       expect(Str.isAlphaNum('9c168aa9843ae2bcc')).toBe(true);
+       expect(Str.isAlphaNum('vw9c168aa9843ae2bcczy')).toBe(true);
+       expect(Str.isAlphaNum('9c168aa984_3ae2bcc')).toBe(false);
+       expect(Str.isAlphaNum('9c168aa9843ae2bcc ')).toBe(false);
+       expect(Str.isAlphaNum('')).toBe(false);
+       expect(Str.isAlphaNum(' ')).toBe(false);
+   });
 
     /**
      * Checks the isHex functionality of Str helper class.
