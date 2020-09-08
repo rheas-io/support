@@ -51,6 +51,15 @@ export class Str {
     }
 
     /**
+     * Checks if a value is a hex string or not.
+     *
+     * @param value
+     */
+    public static isHex(value: string): boolean {
+        return /^[0-9A-Fa-f]+$/g.test(value);
+    }
+
+    /**
      * Returns true if the given argument is a valid email.
      *
      * Weak email validation is performed by checking charcter lengths of

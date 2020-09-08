@@ -40,6 +40,17 @@ describe('Str test suits', () => {
         expect(Str.isValidEmail(randomLocal)).toBe(true);
     });
 
+    /**
+     * Checks the isHex functionality of Str helper class.
+     */
+    it('isHex', () => {
+        expect(Str.isHex('9c168aa9843ae2bcc')).toBe(true);
+        expect(Str.isHex('9c168aa984_3ae2bcc')).toBe(false);
+        expect(Str.isHex('9c168aa9843ae2bcc ')).toBe(false);
+        expect(Str.isHex('')).toBe(false);
+        expect(Str.isHex(' ')).toBe(false);
+    });
+
     it('isUrl', () => {
         expect(Str.isValidUrl('http://rheas.io')).toBe(true);
         expect(Str.isValidUrl('http://rheas')).toBe(false);
