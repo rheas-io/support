@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import { AnyObject } from '@rheas/contracts';
 import { EmailValidator } from './emailValidator';
+import { Exception } from '@rheas/errors/exception';
 
 export class Str {
     /**
@@ -103,6 +104,26 @@ export class Str {
         return !!/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?:(?:10|127)(?:\.\d{1,3}){3})|(?:(?:169\.254|192\.168)(?:\.\d{1,3}){2})|(?:172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i.exec(
             url,
         );
+    }
+
+    /**
+     * Returns a string parsed from a json/object, if the parse was possible.
+     * If parsing failed, the defaultValue will be returned.
+     *
+     * Throws an exception if no default value is given.
+     *
+     * @param value
+     * @param defaultValue
+     */
+    public static jsonToString(value: AnyObject, defaultValue?: string): string {
+        try {
+            return JSON.stringify(value);
+        } catch (err) {
+            if (defaultValue !== undefined) {
+                return defaultValue;
+            }
+            throw new Exception('Error parsing object to string.').setException(err);
+        }
     }
 
     /**
@@ -242,6 +263,26 @@ export class Str {
         value = value.replace(/(.)(?=[A-Z])/gu, '$1_').toLocaleLowerCase();
 
         return value;
+    }
+
+    /**
+     * Returns a json/object parsed from string, if the parse was possible.
+     * If parsing failed, the defaultValue will be returned.
+     *
+     * Throws an exception if no default value is given.
+     *
+     * @param value
+     * @param defaultValue
+     */
+    public static stringToJson(value: string, defaultValue?: AnyObject): AnyObject {
+        try {
+            return JSON.parse(value);
+        } catch (err) {
+            if (defaultValue !== undefined) {
+                return defaultValue;
+            }
+            throw new Exception('Error parsing the string to JSON - ' + value).setException(err);
+        }
     }
 
     /**
