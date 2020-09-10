@@ -274,7 +274,7 @@ export class Str {
      * @param value
      * @param defaultValue
      */
-    public static stringToJson(value: string, defaultValue?: AnyObject): AnyObject {
+    public static stringToJson(value: string, defaultValue?: any): any {
         try {
             return JSON.parse(value);
         } catch (err) {
