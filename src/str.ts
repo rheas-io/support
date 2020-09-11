@@ -46,9 +46,29 @@ export class Str {
      * Returns a regex escaped pattern.
      *
      * @param pattern
+     * @param exclude
      */
-    public static escapeForRegex(pattern: string): string {
-        return pattern.replace(/([()[{*+.$^\\|?])/g, '\\$1');
+    public static escapeForRegex(pattern: string, exclude: string[] = []): string {
+        const charsToEscape = ['(', ')', '[', '{', '*', '+', '.', '$', '^', '|', '?'];
+
+        let regexPattern = '([';
+
+        charsToEscape.forEach((char) => {
+            if (!exclude.includes(char)) {
+                regexPattern += char;
+            }
+        });
+
+        // Regex pattern needs to be escaped for backslashes, otherwise string
+        // concat will add only the escaped char. We need both the escape operator
+        // as well as escaped chaarcter.
+        if (!exclude.includes('\\')) {
+            regexPattern += '\\\\';
+        }
+
+        regexPattern += '])';
+
+        return pattern.replace(new RegExp(regexPattern, 'g'), '\\$1');
     }
 
     /**
@@ -140,8 +160,30 @@ export class Str {
      *
      * @param str
      */
-    public static lcfirst(str: string) {
+    public static lcfirst(str: string): string {
         return str.charAt(0).toLocaleLowerCase() + str.slice(1);
+    }
+
+    /**
+     * Checks the string `str` with another string `pattern` to see
+     * if they matches the pattern. The `pattern` passed to this function
+     * is not a RegEx pattern but a string pattern/format.
+     *
+     * @param str
+     * @param pattern
+     */
+    public static matches(str: string, pattern: string): boolean {
+        pattern = Str.escapeForRegex(pattern, ['*']);
+
+        // replace * with .* for regex matching of any string. This comes
+        // in handy when situations like unknown uri should be matched.
+        //
+        // For example, /payment/* will match against /payment/approved and
+        // /payment/cancelled. Thus CSRF checks can be avoided when the
+        // request is made as a result of webhook call by payment provider.
+        pattern = pattern.replace('*', '.*');
+
+        return new RegExp(`^${pattern}$`, 'g').test(str);
     }
 
     /**

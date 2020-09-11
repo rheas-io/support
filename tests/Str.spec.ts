@@ -99,6 +99,32 @@ describe('Str test suits', () => {
         expect(Str.lcfirst('a')).toBe('a');
     });
 
+    /**
+     * Regex pattern match check.
+     *
+     * 1. Valid pattern check
+     * 2. Invalid pattern check.
+     * 3. Empty pattern check.
+     * 4. Empty string on valid pattern check.
+     */
+    it('pattern match', () => {
+        expect(Str.matches('', '')).toBe(true);
+        expect(Str.matches('', '*')).toBe(true);
+        expect(Str.matches('/payment/123', '*')).toBe(true);
+
+        expect(Str.matches('/payment/123', '/payment/*')).toBe(true);
+        expect(Str.matches('/payment/123', '/payment/123')).toBe(true);
+        expect(Str.matches('/paym$ent/123', '/paym$ent/123')).toBe(true);
+        expect(Str.matches('/payment/failed/123', '/payment/*/123')).toBe(true);
+
+        expect(Str.matches('/payment/123', 'paym.ent/123')).toBe(false);
+        expect(Str.matches('/payment/123', '/payment/*/456')).toBe(false);
+
+        expect(Str.matches('/payment/123', '')).toBe(false);
+
+        expect(Str.matches('', '/payment/123')).toBe(false);
+    });
+
     //Test replace slashes
     it('path', () => {
         expect(Str.path('\\app\\controllers\\\\filename')).toBe('app/controllers/filename');
@@ -123,8 +149,8 @@ describe('Str test suits', () => {
      * 1. Valid length
      * 2. 0 as length
      * 3. Invalid or negative length - should return empty string.
-     * 
-     * Also check if these strings are just alpha numeric strings with 
+     *
+     * Also check if these strings are just alpha numeric strings with
      * no special characters.
      */
     it('random string', async () => {
