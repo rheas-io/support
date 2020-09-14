@@ -190,10 +190,16 @@ export class Str {
      * Cleans a path. Removes backward slashes with forward slashes.
      * Removes trailing and leading spaces and slashes.
      *
+     * If needs root slash, set the second argument to true. Default
+     * is set to false.
+     *
      * @param path
+     * @param needsRootSlash
      */
-    public static path(path: string) {
-        return Str.trim(Str.replaceWithOne(Str.replace(path.trim(), '\\', '/'), '/'), '/');
+    public static path(path: string, needsRootSlash: boolean = false) {
+        path = Str.trim(Str.replaceWithOne(Str.replace(path.trim(), '\\', '/'), '/'), '/');
+
+        return needsRootSlash ? '/' + path : path;
     }
 
     /**
