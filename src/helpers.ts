@@ -1,5 +1,6 @@
 import { FileManager } from '@rheas/files';
 import { Application } from '@rheas/core/app';
+import { IView, IViewFactory } from '@rheas/contracts/views';
 import { IApp } from '@rheas/contracts/core/app';
 import { HttpException } from '@rheas/errors/http';
 import { IFileManager } from '@rheas/contracts/files';
@@ -63,4 +64,15 @@ export function env(key: string, defaultValue: any = '') {
  */
 export function files(): IFileManager {
     return new FileManager();
+}
+
+/**
+ * Creates a new view object at the given source directory.
+ *
+ * @param srcDir
+ */
+export function view(srcDir?: string): IView {
+    const viewFactory: IViewFactory = app().get('view');
+
+    return viewFactory.createNewView(srcDir);
 }
