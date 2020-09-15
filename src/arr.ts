@@ -14,6 +14,30 @@ export class Arr {
     }
 
     /**
+     * Returns a clean array without empty strings, undefined or null values
+     * in it.
+     *
+     * @param value
+     */
+    public static clean(value: any[]): any[] {
+        const clone = [...value];
+
+        return clone.filter((value) => value != null && value !== '');
+    }
+
+    /**
+     * Returns true if the array element is empty. We filter out any empty strings,
+     * undefined and null values in the array, before checking the length.
+     *
+     * @param value
+     */
+    public static isEmpty(value: any[]): boolean {
+        const clean = Arr.clean(value);
+
+        return clean.length === 0;
+    }
+
+    /**
      * Wraps a value into an array.
      *
      * If the `value` is undefined, then an empty array is returned.
