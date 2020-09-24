@@ -1,25 +1,12 @@
-import { FileManager } from '@rheas/files';
 import { Application } from '@rheas/core/app';
-import { IView, IViewFactory } from '@rheas/contracts/views';
+import { IQueue } from '@rheas/contracts/queue';
 import { IApp } from '@rheas/contracts/core/app';
-import { HttpException } from '@rheas/errors/http';
-import { IFileManager } from '@rheas/contracts/files';
+import { IDriverManager } from '@rheas/contracts/services';
+import { IView, IViewFactory } from '@rheas/contracts/views';
 
 /**
- * Throws an Http exception that will break the request pipeline
- * causing capture by the exception handler.
- *
- * @param status
- * @param message
- */
-export function abort(status: number, message: string = ''): void {
-    throw new HttpException(status, message);
-}
-
-/**
- * Returns the application instance. If no instance is
- * available, one will be initialised with the given root
- * path.
+ * Returns the application instance. If no instance is available, one will be 
+ * initialised with the given root path.
  *
  * @param rootPath
  * @return IApp
@@ -58,12 +45,15 @@ export function env(key: string, defaultValue: any = '') {
 }
 
 /**
- * Returns a new fileManager instance.
+ * Returns a queue with the given name or returns the default queue if
+ * no queue name is given.
  *
- * @returns
+ * @param name
  */
-export function files(): IFileManager {
-    return new FileManager();
+export function queue(name?: string): IQueue {
+    const queueManager: IDriverManager<IQueue> = app().get('queue');
+
+    return queueManager.getDriver(name);
 }
 
 /**
