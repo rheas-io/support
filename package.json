@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "tsc": "tsc",
-    "test": "jest",
+    "test": "jest --verbose",
     "coverage": "jest --coverage",
     "copypackage": "cp -rf package.json build",
     "build": "tsc && npm run copypackage",

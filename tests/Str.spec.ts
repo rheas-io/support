@@ -1,11 +1,11 @@
 import { Str } from '../src';
 import { AnyObject } from '@rheas/contracts';
 
-describe('Str test suits', () => {
+describe('Str helper functions test suite.', () => {
     /**
-     * Test camel case of string
+     *
      */
-    it('camelCase', async () => {
+    it('should convert normal string to camelCase', async () => {
         expect(Str.camel('abc def ghi')).toBe('abcDefGhi');
     });
 
