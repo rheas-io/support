@@ -34,6 +34,18 @@ export class Str {
     }
 
     /**
+     * Clears the schema part from the domain and returns it. Also removes
+     * any trailing/leading slashes
+     * 
+     * @param domain 
+     */
+    public static domainWithoutSchema(domain:string):string{
+        domain = Str.trimStart(domain.trim(), ['http://', 'https://']);
+
+        return Str.trim(domain, '/');
+    }
+
+    /**
      * Returns a dotted path of the given path.
      *
      * @param path
