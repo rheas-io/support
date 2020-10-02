@@ -1,4 +1,4 @@
-import { Obj } from '../src';
+import { Obj } from '../src/obj';
 
 describe('Object related functions', () => {
     const obj = {

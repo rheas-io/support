@@ -1,4 +1,4 @@
-import { Str } from '../src';
+import { Str } from '../src/str';
 import { AnyObject } from '@rheas/contracts';
 
 describe('Str helper functions test suite.', () => {
