@@ -13,6 +13,9 @@
     "library",
     "support"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "tsc": "tsc",
     "test": "jest --verbose",
