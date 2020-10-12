@@ -5,7 +5,7 @@ import { IDriverManager } from '@rheas/contracts/services';
 import { IView, IViewFactory } from '@rheas/contracts/views';
 
 /**
- * Returns the application instance. If no instance is available, one will be 
+ * Returns the application instance. If no instance is available, one will be
  * initialised with the given root path.
  *
  * @param rootPath
@@ -42,6 +42,15 @@ export function db() {
  */
 export function env(key: string, defaultValue: any = '') {
     return app().env().get(key, defaultValue);
+}
+
+/**
+ * Returns the mix manifest file path for the given path.
+ *
+ * @param path
+ */
+export function mix(path: string) {
+    return app().get('mix').get(path);
 }
 
 /**
