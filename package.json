@@ -26,7 +26,7 @@
     "build-dev": "tsc --outDir ./build_dev && npm run copypackage_dev"
   },
   "dependencies": {
-    "dayjs": "^1.9.1"
+    "dayjs": "^1.10.7"
   },
   "devDependencies": {
     "@rheas/container": "^0.0.1",

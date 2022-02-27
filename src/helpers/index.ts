@@ -1,5 +1,6 @@
 import { Application } from '@rheas/core/app';
 import { IQueue } from '@rheas/contracts/queue';
+import dayjs from 'dayjs';
 import { IApp } from '@rheas/contracts/core/app';
 import { IDriverManager } from '@rheas/contracts/services';
 import { IView, IViewFactory } from '@rheas/contracts/views';
@@ -51,6 +52,15 @@ export function env(key: string, defaultValue: any = '') {
  */
 export function mix(path: string) {
     return app().get('mix').get(path);
+}
+
+/**
+ * Returns the current time as a DayJs instance.
+ *
+ * @returns
+ */
+export function now() {
+    return dayjs();
 }
 
 /**
