@@ -154,7 +154,7 @@ export class Str {
             if (defaultValue !== undefined) {
                 return defaultValue;
             }
-            throw new Exception('Error parsing object to string.').setException(err);
+            throw new Exception('Error parsing object to string.').setException(err as Error);
         }
     }
 
@@ -341,7 +341,7 @@ export class Str {
             if (defaultValue !== undefined) {
                 return defaultValue;
             }
-            throw new Exception('Error parsing the string to JSON - ' + value).setException(err);
+            throw new Exception('Error parsing the string to JSON - ' + value).setException(err as Error);
         }
     }
 
